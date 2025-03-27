@@ -3,12 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import UserComparison from '../components/UserComparison.jsx';
 import pets from '../data/pets.json';
 
-// Dummy user data for now.
 const initialUser = {
     name: 'Alice',
-    // For now, the user favorites will be loaded from localStorage if available,
-    // otherwise we fall back to these IDs.
-    favoriteIds: [75425319, 75769549]
+    favoriteIds: [] // Adjust these IDs based on your data.
 };
 ---
 
