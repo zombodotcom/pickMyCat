@@ -1,25 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import petData from '../data/pets.json';
+import UserComparison from '../components/UserComparison.jsx';
+import pets from '../data/pets.json';
+
+// Dummy user data for now.
+const initialUser = {
+    name: 'Alice',
+    // For now, the user favorites will be loaded from localStorage if available,
+    // otherwise we fall back to these IDs.
+    favoriteIds: [75425319, 75769549]
+};
 ---
 
 <Layout title="PickMyCat">
-    <h1 class="mb-8 text-3xl font-bold text-center">Our Pet Listings</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {
-            petData.favorites.map((fav) => {
-                const animal = fav._embedded.animal;
-                return (
-                    <article class="bg-white rounded-lg shadow p-4" key={animal.id}>
-                        <img src={animal.primary_photo_cropped.medium} alt={animal.name} class="w-full h-auto rounded mb-4" />
-                        <h2 class="text-xl font-semibold mb-2">{animal.name}</h2>
-                        <p class="text-gray-700 mb-2">{animal.description.substring(0, 150)}...</p>
-                        <a href={animal.url} target="_blank" rel="noopener" class="text-blue-600 hover:underline">
-                            View More
-                        </a>
-                    </article>
-                );
-            })
-        }
-    </div>
+    <h1 className="mb-8 text-3xl font-bold text-center">Our Pet Listings</h1>
+    <UserComparison client:load favorites={pets.favorites} initialUser={initialUser} />
 </Layout>
